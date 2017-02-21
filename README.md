@@ -1,5 +1,9 @@
-# Table component with sorting and server pagination for Angular2
-
+# Table component with server sorting and server pagination for Angular2
+[![npm version](https://badge.fury.io/js/angular2-serverpagination-datatable.svg)](https://badge.fury.io/js/angular2-serverpagination-datatable)
+[![Build Status](https://travis-ci.org/mariuszfoltak/angular2-serverpagination-datatable.svg?branch=master)](https://travis-ci.org/mariuszfoltak/angular2-serverpagination-datatable)
+[![Code Climate](https://codeclimate.com/github/mariuszfoltak/angular2-serverpagination-datatable/badges/gpa.svg)](https://codeclimate.com/github/mariuszfoltak/angular2-serverpagination-datatable)
+[![Test Coverage](https://codeclimate.com/github/mariuszfoltak/angular2-serverpagination-datatable/badges/coverage.svg)](https://codeclimate.com/github/mariuszfoltak/angular2-serverpagination-datatable/coverage)
+[![npm downloads](https://img.shields.io/npm/dm/angular2-serverpagination-datatable.svg)](https://npmjs.org/angular2-serverpagination-datatable)
 ## Demo
 
 Check [live demo](http://plnkr.co/edit/VPTypWHfFnqC1LpOpf8P?p=preview) in plunker

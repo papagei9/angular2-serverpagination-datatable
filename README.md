@@ -88,7 +88,7 @@ ngOnInit(): void {
                 setTimeout(() => {
 
                     this.data = _.orderBy(data.json(), this.sortBy, [this.sortOrder]);
-                    this.data = _.slice(this.data, this.activePage, this.activePage + this.rowsOnPage);
+                    this.data = _.slice(this.data, (this.activePage-1)*this.rowsOnPage, (this.activePage-1)*this.rowsOnPage + this.rowsOnPage);
                     this.itemsTotal = data.json().length;
                 }, 2000);
             });

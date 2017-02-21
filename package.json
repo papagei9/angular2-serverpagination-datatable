@@ -1,6 +1,6 @@
 {
-  "name": "angular2-datatable",
-  "version": "0.5.3",
+  "name": "angular2-serverpagination-datatable",
+  "version": "1.5.3",
   "description": "DataTable component for Angular2 framework",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mariuszfoltak/angular2-datatable.git"
+    "url": "git+https://github.com/Ants24/angular2-serverpagination-datatable.git"
   },
   "keywords": [
     "angular",
@@ -28,12 +28,12 @@
     "sort",
     "sorting"
   ],
-  "author": "mariuszfoltak@gmail.com",
+  "author": "chen.kiven@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mariuszfoltak/angular2-datatable/issues"
+    "url": "https://github.com/Ants24/angular2-serverpagination-datatable/issues"
   },
-  "homepage": "https://github.com/mariuszfoltak/angular2-datatable#readme",
+  "homepage": "https://github.com/Ants24/angular2-serverpagination-datatable#readme",
   "devDependencies": {
     "@angular/core": "^2.1.0",
     "@angular/compiler": "^2.1.0",

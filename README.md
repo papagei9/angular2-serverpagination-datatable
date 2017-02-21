@@ -1,9 +1,4 @@
-# Table component with sorting and pagination for Angular2
-[![npm version](https://badge.fury.io/js/angular2-datatable.svg)](https://badge.fury.io/js/angular2-datatable)
-[![Build Status](https://travis-ci.org/mariuszfoltak/angular2-datatable.svg?branch=master)](https://travis-ci.org/mariuszfoltak/angular2-datatable)
-[![Code Climate](https://codeclimate.com/github/mariuszfoltak/angular2-datatable/badges/gpa.svg)](https://codeclimate.com/github/mariuszfoltak/angular2-datatable)
-[![Test Coverage](https://codeclimate.com/github/mariuszfoltak/angular2-datatable/badges/coverage.svg)](https://codeclimate.com/github/mariuszfoltak/angular2-datatable/coverage)
-[![npm downloads](https://img.shields.io/npm/dm/angular2-datatable.svg)](https://npmjs.org/angular2-datatable)
+# Table component with sorting and server pagination for Angular2
 
 ## Demo
 
@@ -12,7 +7,7 @@ Check [live demo](http://plnkr.co/edit/PxBaZs?p=preview) in plunker
 ## Installation
 
 ```
-npm i -S angular2-datatable
+npm i -S angular2-serverpagination-datatable
 ```
 
 ## Usage example
@@ -21,7 +16,7 @@ AppModule.ts
 ```typescript
 import {NgModule} from "@angular/core";
 ...
-import {DataTableModule} from "angular2-datatable";
+import {DataTableModule} from "angular2-serverpagination-datatable";
 
 @NgModule({
     imports: [
@@ -35,43 +30,94 @@ export class AppModule {
 }
 ```
 
-AppComponent.html
+UserComponent.html
 ```html
-<table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
-    <thead>
-    <tr>
-        <th style="width: 20%">
-            <mfDefaultSorter by="name">Name</mfDefaultSorter>
-        </th>
-        <th style="width: 50%">
-            <mfDefaultSorter by="email">Email</mfDefaultSorter>
-        </th>
-        <th style="width: 10%">
-            <mfDefaultSorter by="age">Age</mfDefaultSorter>
-        </th>
-        <th style="width: 20%">
-            <mfDefaultSorter by="city">City</mfDefaultSorter>
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of mf.data">
-        <td>{{item.name}}</td>
-        <td>{{item.email}}</td>
-        <td class="text-right">{{item.age}}</td>
-        <td>{{item.city | uppercase}}</td>
-    </tr>
-    </tbody>
-    <tfoot>
-    <tr>
-        <td colspan="4">
-            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-        </td>
-    </tr>
-    </tfoot>
-</table>
+<table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
+                   [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder" [mfActivePage]="activePage"
+                    (mfOnPageChange)="onPageChange($event)" [(mfAmountOfRows)]="itemsTotal" (mfSortOrderChange)="onSortOrder($event)">
+                <thead>
+                <tr>
+                    <th style="width: 10%"></th>
+                    <th style="width: 20%">
+                        <mfDefaultSorter by="name">Name</mfDefaultSorter>
+                    </th>
+                    <th style="width: 40%">
+                        <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                    </th>
+                    <th style="width: 10%">
+                        <mfDefaultSorter by="age">Age</mfDefaultSorter>
+                    </th>
+                    <th style="width: 20%">
+                        <mfDefaultSorter [by]="sortByWordLength">City</mfDefaultSorter>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of mf.data">
+                    <td>
+                        <button (click)="remove(item)" class="btn btn-danger">x</button>
+                    </td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.email}}</td>
+                    <td class="text-right">{{item.age}}</td>
+                    <td>{{item.city | uppercase}}</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
 ```
 
+UserComponent.ts
+```typescript
+
+ngOnInit(): void {
+        this.loadData();
+    }
+
+    public loadData() {
+        this.http.get("/app/data.json")
+            .subscribe((data) => {
+                setTimeout(() => {
+
+                    this.data = _.orderBy(data.json(), this.sortBy, [this.sortOrder]);
+                    this.data = _.slice(this.data, this.activePage, this.activePage + this.rowsOnPage);
+                    this.itemsTotal = data.json().length;
+                }, 2000);
+            });
+    }
+
+    public toInt(num: string) {
+        return +num;
+    }
+
+    public sortByWordLength = (a: any) => {
+        return a.city.length;
+    }
+
+    public remove(item) {
+        let index = this.data.indexOf(item);
+        if (index > -1) {
+            this.data.splice(index, 1);
+        }
+    }
+    public onPageChange(event) {
+        this.rowsOnPage = event.rowsOnPage;
+        this.activePage = event.activePage;
+        this.loadData();
+    }
+
+    public onSortOrder(event) {
+        this.loadData();
+    }
+
+
+```
 ## API
 
 ### `mfData` directive
@@ -87,6 +133,7 @@ AppComponent.html
  - outputs
    - `mfSortByChange: any` - sort by parameter
    - `mfSortOrderChange: any` - sort order parameter
+   - `mfOnPageChange: any` - page change parameter(rowsOnPage,activePage)
  
 ### `mfDefaultSorter` component
 

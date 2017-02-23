@@ -2,15 +2,18 @@
 
 This version has slightly different syntax due to backwards-compatilibity to the angular2-datatable module.
 
-[![npm downloads](https://img.shields.io/npm/dm/angular2-serverpagination-datatable-abilium.svg)](https://npmjs.org/angular2-serverpagination-datatable-abilium)
+This version is based on [https://github.com/Ants24/angular2-serverpagination-datatable](https://github.com/Ants24/angular2-serverpagination-datatable)
+
 ## Demo
 
 **NOT UPDATED** ~~Check [~~live demo~~](http://plnkr.co/edit/VPTypWHfFnqC1LpOpf8P?p=preview) in plunker~~
 
 ## Installation
 
+Module is currently not published on npm. Use the .tgz archive to install it locally.
+
 ```
-npm i -S angular2-serverpagination-datatable-abilium
+npm i -S angular2-serverpagination-datatable-abilium-1.5.4.tgz --save
 ```
 
 ## Usage example

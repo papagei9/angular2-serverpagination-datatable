@@ -1,22 +1,22 @@
 import {Component, Input, SimpleChange, OnChanges, Optional} from "@angular/core";
-import {DataTable, PageEvent} from "./DataTable";
+import {ServerDataTable, ServerPageEvent} from "./ServerDataTable";
 
 @Component({
-    selector: "mfPaginator",
+    selector: "smfPaginator",
     template: `<ng-content></ng-content>`
 })
-export class Paginator implements OnChanges {
+export class ServerPaginator implements OnChanges {
 
-    @Input("mfTable") inputMfTable: DataTable;
+    @Input("smfTable") inputMfTable: ServerDataTable;
 
-    private mfTable: DataTable;
+    private mfTable: ServerDataTable;
 
     public activePage: number;
     public rowsOnPage: number;
     public dataLength: number = 0;
     public lastPage: number;
 
-    public constructor(@Optional() private injectMfTable: DataTable) {
+    public constructor(@Optional() private injectMfTable: ServerDataTable) {
     }
 
     public ngOnChanges(changes: {[key: string]: SimpleChange}): any {
@@ -33,7 +33,7 @@ export class Paginator implements OnChanges {
         this.mfTable.setPage(this.activePage, rowsOnPage);
     }
 
-    private onPageChangeSubscriber = (event: PageEvent)=> {
+    private onPageChangeSubscriber = (event: ServerPageEvent)=> {
         this.activePage = event.activePage;
         this.rowsOnPage = event.rowsOnPage;
         this.dataLength = event.dataLength;

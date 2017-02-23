@@ -63,7 +63,7 @@ Bugfixes:
 
 Bugfixes:
 
-    - add import for lodash in file `DataTable.ts`
+    - add import for lodash in file `ServerDataTable.ts`
 
 ## 0.2.3 (2016-03-21)
 

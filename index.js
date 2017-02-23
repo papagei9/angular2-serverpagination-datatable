@@ -1,14 +1,14 @@
-var dataTable_directive = require('./lib/DataTable');
-var defaultSorter_directive = require('./lib/DefaultSorter');
-var paginator_component = require('./lib/Paginator');
-var bootstrapPaginator_component = require('./lib/BootstrapPaginator');
-var dataTable_module = require('./lib/DataTableModule');
+var serverDataTable_directive = require('./lib/ServerDataTable');
+var serverDefaultSorter_directive = require('./lib/ServerDefaultSorter');
+var serverPaginator_component = require('./lib/ServerPaginator');
+var serverBootstrapPaginator_component = require('./lib/ServerBootstrapPaginator');
+var serverDataTable_module = require('./lib/ServerDataTableModule');
 
-exports.DataTable = dataTable_directive.DataTable;
-exports.DataEvent = dataTable_directive.DataEvent;
-exports.PageEvent = dataTable_directive.PageEvent;
-exports.SortEvent = dataTable_directive.SortEvent;
-exports.DefaultSorter = defaultSorter_directive.DefaultSorter;
-exports.Paginator = paginator_component.Paginator;
-exports.BootstrapPaginator = bootstrapPaginator_component.BootstrapPaginator;
-exports.DataTableModule = dataTable_module.DataTableModule;
+exports.ServerDataTable = serverDataTable_directive.ServerDataTable;
+exports.ServerDataEvent = serverDataTable_directive.ServerDataEvent;
+exports.ServerPageEvent = serverDataTable_directive.ServerPageEvent;
+exports.ServerSortEvent = serverDataTable_directive.ServerSortEvent;
+exports.ServerDefaultSorter = serverDefaultSorter_directive.ServerDefaultSorter;
+exports.ServerPaginator = serverPaginator_component.ServerPaginator;
+exports.ServerBootstrapPaginator = serverBootstrapPaginator_component.ServerBootstrapPaginator;
+exports.ServerDataTableModule = serverDataTable_module.ServerDataTableModule;

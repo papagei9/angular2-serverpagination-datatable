@@ -1,15 +1,16 @@
 # Table component with server sorting and server pagination for Angular2
-[![npm version](https://badge.fury.io/js/angular2-serverpagination-datatable.svg)](https://badge.fury.io/js/angular2-serverpagination-datatable)
-[![Build Status](https://travis-ci.org/ants24/angular2-serverpagination-datatable.svg?branch=master)](https://travis-ci.org/ants24/angular2-serverpagination-datatable)
-[![npm downloads](https://img.shields.io/npm/dm/angular2-serverpagination-datatable.svg)](https://npmjs.org/angular2-serverpagination-datatable)
+
+This version has slightly different syntax due to backwards-compatilibity to the angular2-datatable module.
+
+[![npm downloads](https://img.shields.io/npm/dm/angular2-serverpagination-datatable-abilium.svg)](https://npmjs.org/angular2-serverpagination-datatable-abilium)
 ## Demo
 
-Check [live demo](http://plnkr.co/edit/VPTypWHfFnqC1LpOpf8P?p=preview) in plunker
+**NOT UPDATED** ~~Check [~~live demo~~](http://plnkr.co/edit/VPTypWHfFnqC1LpOpf8P?p=preview) in plunker~~
 
 ## Installation
 
 ```
-npm i -S angular2-serverpagination-datatable
+npm i -S angular2-serverpagination-datatable-abilium
 ```
 
 ## Usage example
@@ -18,12 +19,12 @@ AppModule.ts
 ```typescript
 import {NgModule} from "@angular/core";
 ...
-import {DataTableModule} from "angular2-serverpagination-datatable";
+import {ServerDataTableModule} from "angular2-serverpagination-datatable-abilium";
 
 @NgModule({
     imports: [
         ...
-        DataTableModule
+        ServerDataTableModule
     ],
     ...
 })
@@ -34,23 +35,23 @@ export class AppModule {
 
 UserComponent.html
 ```html
-<table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
-                   [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder" [mfActivePage]="activePage"
-                    (mfOnPageChange)="onPageChange($event)" [(mfAmountOfRows)]="itemsTotal" (mfSortOrderChange)="onSortOrder($event)">
+<table class="table table-striped" [smfData]="data | dataFilter : filterQuery" #smf="mfDataTable"
+                   [smfRowsOnPage]="rowsOnPage" [(smfSortBy)]="sortBy" [(smfSortOrder)]="sortOrder" [smfActivePage]="activePage"
+                    (smfOnPageChange)="onPageChange($event)" [(smfAmountOfRows)]="itemsTotal" (smfSortOrderChange)="onSortOrder($event)">
                 <thead>
                 <tr>
                     <th style="width: 10%"></th>
                     <th style="width: 20%">
-                        <mfDefaultSorter by="name">Name</mfDefaultSorter>
+                        <smfDefaultSorter by="name">Name</smfDefaultSorter>
                     </th>
                     <th style="width: 40%">
-                        <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                        <smfDefaultSorter by="email">Email</smfDefaultSorter>
                     </th>
                     <th style="width: 10%">
-                        <mfDefaultSorter by="age">Age</mfDefaultSorter>
+                        <smfDefaultSorter by="age">Age</smfDefaultSorter>
                     </th>
                     <th style="width: 20%">
-                        <mfDefaultSorter [by]="sortByWordLength">City</mfDefaultSorter>
+                        <smfDefaultSorter [by]="sortByWordLength">City</smfDefaultSorter>
                     </th>
                 </tr>
                 </thead>
@@ -68,7 +69,7 @@ UserComponent.html
                 <tfoot>
                 <tr>
                     <td colspan="5">
-                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                        <smfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></smfBootstrapPaginator>
                     </td>
                 </tr>
                 </tfoot>
@@ -124,28 +125,28 @@ ngOnInit(): void {
 
 ### `mfData` directive
 
- - selector: `table[mfData]`
- - exportAs: `mfDataTable`
+ - selector: `table[smfData]`
+ - exportAs: `smfDataTable`
  - inputs
-   - `mfData: any[]` - array of data to display in table
-   - `mfRowsOnPage: number` - number of rows should be displayed on page (default: 1000)
-   - `mfActivePage: number` - page number (default: 1)
-   - `mfSortBy: any` - sort by parameter
-   - `mfSortOrder: string` - sort order parameter, "asc" or "desc"
+   - `smfData: any[]` - array of data to display in table
+   - `smfRowsOnPage: number` - number of rows should be displayed on page (default: 1000)
+   - `smfActivePage: number` - page number (default: 1)
+   - `smfSortBy: any` - sort by parameter
+   - `smfSortOrder: string` - sort order parameter, "asc" or "desc"
  - outputs
-   - `mfSortByChange: any` - sort by parameter
-   - `mfSortOrderChange: any` - sort order parameter
-   - `mfOnPageChange: any` - page change parameter(rowsOnPage,activePage)
+   - `smfSortByChange: any` - sort by parameter
+   - `smfSortOrderChange: any` - sort order parameter
+   - `smfOnPageChange: any` - page change parameter(rowsOnPage,activePage)
  
-### `mfDefaultSorter` component
+### `smfDefaultSorter` component
 
- - selector: `mfDefaultSorter`
+ - selector: `smfDefaultSorter`
  - inputs
    - `by: any` - specify how to sort data (argument for lodash function [_.sortBy ](https://lodash.com/docs#sortBy))
  
-### `mfBootstrapPaginator` component
+### `smfBootstrapPaginator` component
 Displays buttons for changing current page and number of displayed rows using bootstrap template (css for bootstrap is required). If array length is smaller than current displayed rows on page then it doesn't show button for changing page. If array length is smaller than min value rowsOnPage then it doesn't show any buttons.
 
- - selector: `mfBootstrapPaginator`
+ - selector: `smfBootstrapPaginator`
  - inputs
    - `rowsOnPageSet: number` - specify values for buttons to change number of diplayed rows

@@ -1,26 +1,26 @@
 ///<reference path="../node_modules/@types/jasmine/index.d.ts"/>
 import {SimpleChange, Component} from "@angular/core";
-import {DataTable, PageEvent, SortEvent} from "./DataTable";
+import {ServerDataTable, ServerPageEvent, ServerSortEvent} from "./ServerDataTable";
 import {TestBed, ComponentFixture} from "@angular/core/testing";
 import {By} from "@angular/platform-browser";
 import * as _ from "lodash";
 
 @Component({
-    template: `<table [mfData]="[]"></table>`
+    template: `<table [smfData]="[]"></table>`
 })
 class TestComponent {
 }
 
-describe("DataTable directive tests", ()=> {
-    let datatable: DataTable;
+describe("ServerDataTable directive tests", ()=> {
+    let datatable: ServerDataTable;
     let fixture: ComponentFixture<TestComponent>;
 
     beforeEach(()=> {
         TestBed.configureTestingModule({
-            declarations: [DataTable, TestComponent]
+            declarations: [ServerDataTable, TestComponent]
         });
         fixture = TestBed.createComponent(TestComponent);
-        datatable = fixture.debugElement.query(By.directive(DataTable)).injector.get(DataTable) as DataTable;
+        datatable = fixture.debugElement.query(By.directive(ServerDataTable)).injector.get(ServerDataTable) as ServerDataTable;
 
         datatable.inputData = [
             {id: 3, name: 'banana'},
@@ -97,12 +97,12 @@ describe("DataTable directive tests", ()=> {
             expect(datatable.data).toEqual([{id: 5, name: 'Ðrone'}, {id: 4, name: 'Ananas'}]);
         });
 
-        it("should change rowsOnPage when mfRowsOnPage changed", (done)=> {
+        it("should change rowsOnPage when smfRowsOnPage changed", (done)=> {
             datatable.rowsOnPage = 2;
             datatable.ngDoCheck();
             expect(datatable.data).toEqual([{id: 3, name: 'banana'}, {id: 1, name: 'Duck'}]);
 
-            datatable.onPageChange.subscribe((pageOptions: PageEvent)=> {
+            datatable.onPageChange.subscribe((pageOptions: ServerPageEvent)=> {
                 expect(pageOptions.rowsOnPage).toEqual(3);
                 done();
             });
@@ -142,7 +142,7 @@ describe("DataTable directive tests", ()=> {
         });
 
         it("should fire onSortChange event after sorting input value changed", (done)=> {
-            datatable.onSortChange.subscribe((event: SortEvent)=> {
+            datatable.onSortChange.subscribe((event: ServerSortEvent)=> {
                 expect(event.sortBy).toEqual("id");
                 expect(event.sortOrder).toEqual("desc");
                 done();
@@ -159,7 +159,7 @@ describe("DataTable directive tests", ()=> {
         });
 
         it("should set sortOrder to 'asc' if not provided", (done)=> {
-            datatable.onSortChange.subscribe((event: SortEvent)=> {
+            datatable.onSortChange.subscribe((event: ServerSortEvent)=> {
                 expect(event.sortBy).toEqual("id");
                 expect(event.sortOrder).toEqual("asc");
                 done();
@@ -174,7 +174,7 @@ describe("DataTable directive tests", ()=> {
         });
 
         it("should set sortOrder to 'asc' if provided something else than 'asc' or 'desc'", (done)=> {
-            datatable.onSortChange.subscribe((event: SortEvent)=> {
+            datatable.onSortChange.subscribe((event: ServerSortEvent)=> {
                 expect(event.sortBy).toEqual("id");
                 expect(event.sortOrder).toEqual("asc");
                 done();
@@ -340,7 +340,7 @@ describe("DataTable directive tests", ()=> {
             datatable.setPage(2, 2);
             datatable.ngDoCheck();
 
-            datatable.onPageChange.subscribe((opt: PageEvent)=> {
+            datatable.onPageChange.subscribe((opt: ServerPageEvent)=> {
                 expect(opt.activePage).toEqual(1);
                 expect(opt.dataLength).toEqual(2);
                 expect(opt.rowsOnPage).toEqual(2);
@@ -355,7 +355,7 @@ describe("DataTable directive tests", ()=> {
             datatable.setPage(2, 2);
             datatable.ngDoCheck();
 
-            datatable.onPageChange.subscribe((opt: PageEvent)=> {
+            datatable.onPageChange.subscribe((opt: ServerPageEvent)=> {
                 expect(opt.activePage).toEqual(2);
                 expect(opt.dataLength).toEqual(6);
                 expect(opt.rowsOnPage).toEqual(2);
@@ -369,7 +369,7 @@ describe("DataTable directive tests", ()=> {
             datatable.setPage(2, 2);
             datatable.ngDoCheck();
 
-            datatable.onPageChange.subscribe((opt: PageEvent)=> {
+            datatable.onPageChange.subscribe((opt: ServerPageEvent)=> {
                 expect(opt.activePage).toEqual(1);
                 expect(opt.dataLength).toEqual(2);
                 expect(opt.rowsOnPage).toEqual(2);

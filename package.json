@@ -1,7 +1,7 @@
 {
-  "name": "angular2-serverpagination-datatable",
+  "name": "angular2-serverpagination-datatable-abilium",
   "version": "1.5.4",
-  "description": "DataTable component for Angular2 framework",
+  "description": "Server DataTable component for Angular2 framework modified by Abilium",
   "main": "index.js",
   "scripts": {
     "prebuild": "rimraf lib",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ants24/angular2-serverpagination-datatable.git"
+    "url": "git+https://github.com/papagei9/angular2-serverpagination-datatable.git"
   },
   "keywords": [
     "angular",
@@ -28,12 +28,12 @@
     "sort",
     "sorting"
   ],
-  "author": "chen.kiven@gmail.com",
+  "author": "east7074@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Ants24/angular2-serverpagination-datatable/issues"
+    "url": "https://github.com/papagei9/angular2-serverpagination-datatable/issues"
   },
-  "homepage": "https://github.com/Ants24/angular2-serverpagination-datatable#readme",
+  "homepage": "https://github.com/papagei9/angular2-serverpagination-datatable#readme",
   "devDependencies": {
     "@angular/core": "^2.1.0",
     "@angular/compiler": "^2.1.0",

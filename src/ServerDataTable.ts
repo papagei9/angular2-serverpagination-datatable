@@ -5,52 +5,52 @@ import {
 import * as _ from "lodash";
 import {ReplaySubject} from "rxjs/Rx";
 
-export interface SortEvent {
+export interface ServerSortEvent {
     sortBy: string|string[];
     sortOrder: string
 }
 
-export interface PageEvent {
+export interface ServerPageEvent {
     activePage: number;
     rowsOnPage: number;
     dataLength: number;
 }
 
-export interface DataEvent {
+export interface ServerDataEvent {
     length: number;
 }
 
 @Directive({
-    selector: 'table[mfData]',
-    exportAs: 'mfDataTable'
+    selector: 'table[smfData]',
+    exportAs: 'smfDataTable'
 })
-export class DataTable implements OnChanges, DoCheck {
+export class ServerDataTable implements OnChanges, DoCheck {
 
     private diff: IterableDiffer;
-    @Input("mfData") public inputData: any[] = [];
+    @Input("smfData") public inputData: any[] = [];
 
-    @Input("mfSortBy") public sortBy: string|string[] = "";
-    @Input("mfSortOrder") public sortOrder = "asc";
-    @Output("mfSortByChange") public sortByChange = new EventEmitter<string|string[]>();
-    @Output("mfSortOrderChange") public sortOrderChange = new EventEmitter<string>();
-    @Output("mfOnPageChange") public onMyPageChange = new EventEmitter<PageEvent>();
-    @Input("mfRowsOnPage") public rowsOnPage = 1000;
-    @Input("mfActivePage") public activePage = 1;
-    @Input("mfAmountOfRows") public amountOfRows = 0;
+    @Input("smfSortBy") public sortBy: string|string[] = "";
+    @Input("smfSortOrder") public sortOrder = "asc";
+    @Output("smfSortByChange") public sortByChange = new EventEmitter<string|string[]>();
+    @Output("smfSortOrderChange") public sortOrderChange = new EventEmitter<string>();
+    @Output("smfOnPageChange") public onMyPageChange = new EventEmitter<ServerPageEvent>();
+    @Input("smfRowsOnPage") public rowsOnPage = 1000;
+    @Input("smfActivePage") public activePage = 1;
+    @Input("smfAmountOfRows") public amountOfRows = 0;
 
 
     private mustRecalculateData = false;
 
     public data: any[];
 
-    public onSortChange = new ReplaySubject<SortEvent>(1);
-    public onPageChange = new EventEmitter<PageEvent>();
+    public onSortChange = new ReplaySubject<ServerSortEvent>(1);
+    public onPageChange = new EventEmitter<ServerPageEvent>();
 
     public constructor(private differs: IterableDiffers) {
         this.diff = differs.find([]).create(null);
     }
 
-    public getSort(): SortEvent {
+    public getSort(): ServerSortEvent {
         return {sortBy: this.sortBy, sortOrder: this.sortOrder};
     }
 
@@ -65,7 +65,7 @@ export class DataTable implements OnChanges, DoCheck {
         }
     }
 
-    public getPage(): PageEvent {
+    public getPage(): ServerPageEvent {
         return {activePage: this.activePage, rowsOnPage: this.rowsOnPage, dataLength: this.inputData.length};
     }
 
@@ -104,7 +104,7 @@ export class DataTable implements OnChanges, DoCheck {
 
         if (changes["sortBy"] || changes["sortOrder"]) {
             if (!_.includes(["asc", "desc"], this.sortOrder)) {
-                console.warn("angular2-serverpagination-datatable: value for input mfSortOrder must be one of ['asc', 'desc'], but is:", this.sortOrder);
+                console.warn("angular2-serverpagination-datatable: value for input smfSortOrder must be one of ['asc', 'desc'], but is:", this.sortOrder);
                 this.sortOrder = "asc";
             }
             if (this.sortBy) {
